@@ -134,7 +134,12 @@ $('#search-results').on('click', '.add', function () {
         rating: selectedStars
     }
 // save movie when Add button clicked
-    saveMovie(newMovie)
+    if(selectedStars){
+        saveMovie(newMovie)
+    } else {
+        console.log('Added movie must include a rating!')
+    }
+    
 })
 
 const saveMovie = (movie) =>

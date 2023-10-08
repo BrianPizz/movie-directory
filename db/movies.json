@@ -1,1 +1,51 @@
-[]
+[
+    {
+        "title": "Top Gun: Maverick",
+        "director": "Joseph Kosinski",
+        "description": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to ...",
+        "rating": 5,
+        "id": "2936"
+    },
+    {
+        "title": "Tenet",
+        "director": "Christopher Nolan",
+        "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
+        "rating": 3,
+        "id": "2d4c"
+    },
+    {
+        "title": "Interstellar",
+        "director": "Christopher Nolan",
+        "description": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
+        "rating": 5,
+        "id": "91b7"
+    },
+    {
+        "title": "Avengers: Endgame",
+        "director": "Anthony Russo, Joe Russo",
+        "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+        "rating": 4,
+        "id": "dd1b"
+    },
+    {
+        "title": "Mad Max: Fury Road",
+        "director": "George Miller",
+        "description": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper and a drifter named Max.",
+        "rating": 3,
+        "id": "4404"
+    },
+    {
+        "title": "Snakes on a Plane",
+        "director": "David R. Ellis",
+        "description": "An FBI agent takes on a plane full of deadly venomous snakes, deliberately released to kill a witness being flown from Honolulu to Los Angeles to testify against a mob boss.",
+        "rating": 2,
+        "id": "17dc"
+    },
+    {
+        "title": "The Dark Knight Rises",
+        "director": "Christopher Nolan",
+        "description": "Eight years after the Joker's reign of chaos, Batman is coerced out of exile with the assistance of the mysterious Selina Kyle in order to defend Gotham City from the vicious guerrilla terrorist Bane.",
+        "rating": 5,
+        "id": "4464"
+    }
+]
