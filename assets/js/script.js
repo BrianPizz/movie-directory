@@ -21,6 +21,7 @@ const getMovieId = async () => {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        // if there are more than five movies only display five
         if(data.total > 5){
             for (let i = 0; i < 5; i++) {
                 movieId.push(data.search[i].id);
@@ -30,7 +31,8 @@ const getMovieId = async () => {
                 movieId.push(data.search[i].id);
             }
         }
-        console.log(movieId)
+        // console.log(movieId)
+        // get movie details for each ID
         for (const id of movieId) {
             await getDetails(id);
         }
@@ -50,16 +52,16 @@ const getDetails = async (id) => {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log(data);
-        renderMovies(data);
+        // console.log(data);
+        data.Response === 'True' && renderMovies(data);
+        
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
 const renderMovies = (movie) => {
-    
-
+    // copy html format and create replica div
     const card = $('<div>').addClass('card');
 
     const resultCard = $('<div>').addClass('card-content');
@@ -116,8 +118,33 @@ const renderMovies = (movie) => {
 
     const add = $('<button>').addClass('mt-5 mb-3 add button is-primary').text('Add');
     rating.append(add)
-
 }
+
+// create an object of movie data when Add button is clicked
+$('#search-results').on('click', '.add', function () {
+    const title = $(this).closest('.card').find('.title').text();
+    const director = $(this).closest('.card').find('.subtitle').text();
+    const description = $(this).closest('.card').find('.has-text-weight-medium').text();
+    const selectedStars = $(this).closest('.card').find('.active').length;
+
+    const newMovie = {
+        title: title,
+        director: director,
+        description: description,
+        rating: selectedStars
+    }
+// save movie when Add button clicked
+    saveMovie(newMovie)
+})
+
+const saveMovie = (movie) =>
+fetch('/api/movies', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(movie)
+})
 
 
 searchBtn.on('click', async function (event) {
@@ -125,5 +152,4 @@ searchBtn.on('click', async function (event) {
     movieSearchResultsEl.empty();
     movieSearchEl.empty();
     await getMovieId();
-    console.log('yuh')
 })
