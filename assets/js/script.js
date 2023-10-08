@@ -77,7 +77,7 @@ const renderMovies = (movie) => {
     image.attr('alt', movie.Title);
     figure.append(image);
 
-    const content = $('<div>').addClass('media-content');
+    const content = $('<div>').addClass('custom-media media-content');
     media.append(content);
 
     const title = $('<div>').addClass('title is-4').text(movie.Title);
@@ -90,6 +90,33 @@ const renderMovies = (movie) => {
     content.append(plot);
 
     movieSearchResultsEl.append(card);
+
+    const rating = $('<div>').addClass('has-text-centered');
+    media.append(rating)
+
+    const stars = $('<div>').addClass('stars');
+    rating.append(stars);
+
+    for (let i = 0; i < 5; i++) {
+        const icon = $('<span>').addClass('icon');
+        stars.append(icon);
+        const star = $('<i>').addClass('fas fa-star');
+        icon.append(star);
+
+        star.on('click', () => {
+            // Clear 'active' class from all stars
+            stars.find('i').removeClass('active');
+
+            // Add 'active' class to clicked star and previous stars
+            for (let j = 0; j <= i; j++) {
+                stars.find('i').eq(j).addClass('active');
+            }
+        });
+    }
+
+    const add = $('<button>').addClass('mt-5 mb-3 add button is-primary').text('Add');
+    rating.append(add)
+
 }
 
 
@@ -100,5 +127,3 @@ searchBtn.on('click', async function (event) {
     await getMovieId();
     console.log('yuh')
 })
-
-
