@@ -1,6 +1,7 @@
 const movieSearchEl = $('#movie-search');
 const movieSearchResultsEl = $('#search-results');
 const searchBtn = $('#search-button');
+const savedMoviesEl = $('#saved-movies')
 let movieId = [];
 
 const getMovieId = async () => {
@@ -151,17 +152,78 @@ const getMovies = () =>
     });
 
 const renderSavedMovies = async (movies) => {
-    let jsonMovies = await notStrictEqual.json();
+    let jsonMovies = await movies.json();
 
     let movieList = [];
 
-    const createEl = () => {
+    const createEl = (img, title, dir, desc) => {
+        const saveCard = $('<div>').addClass('card');
 
+        const saveImgSec = $('<div>').addClass('card-image');
+        saveCard.append(saveImgSec);
+
+        const saveImgCont = $('<figure>').addClass('image is-4by3');
+        saveImgSec.append(saveImgCont);
+
+        const saveImg = $('<img>').attr('src', img);
+        saveImgCont.append(saveImg);
+
+        const saveCardContent = $('<div>').addClass('card-content');
+        saveCard.append(saveCardContent);
+
+        const saveMedia = $('<div>').addClass('media has-text-centered');
+        saveCardContent.append(saveMedia);
+
+        const saveMediaContent = $('<div>').addClass('media-content');
+        saveMedia.append(saveMediaContent);
+
+        const saveTitle = $('<div>').addClass('title is-4').text(title);
+        saveMediaContent.append(saveTitle);
+
+        const saveDirector = $('<div>').addClass('subtitle is-6').text(dir);
+        saveMediaContent.append(saveDirector);
+
+        const saveDesc = $('<div>').addClass('content desc-custom has-text-weight-medium is-6').text(desc);
+        saveCardContent.append(saveDesc);
+
+        const saveRating = $('<div>').addClass('stars has-text-centered mt-3');
+        saveDesc.append(saveRating);
+
+        for (let i = 0; i < 5; i++) {
+            const saveIcon = $('<span>').addClass('icon');
+            saveRating.append(saveIcon);
+            const saveStar = $('<i>').addClass('fas fa-star');
+            saveIcon.append(saveStar);
+
+            //add active star icon 
+        }
+
+        const removeBtnContainer = $('<div>').addClass('button-container has-text-centered mt-4');
+        saveDesc.append(removeBtnContainer);
+
+        const removeBtn = $('<button>').addClass('button is-danger is-outlined');
+        removeBtnContainer.append(removeBtn);
+
+        const btnText = $('<span>').text('Remove');
+        removeBtn.append(btnText);
+
+        const iconContainer = $('<span>').addClass('icon is-small');
+        removeBtn.append(iconContainer);
+
+        const removeIcon = $('<i>').addClass('fas fa-times');
+        iconContainer.append(removeIcon);
+
+        $('.slick').slick('slickAdd', saveCard)
     }
 
-    if(jsonMovies.length === 0) {
-        movieList.push(createEl('No saved notes'))
+    if (jsonMovies.length === 0) {
+        createEl('#', 'No saved Movies!', '', '')
     }
+
+    jsonMovies.forEach(movie => {
+        console.log(movie)
+        createEl('#', movie.title, movie.director, movie.description)
+    });
 };
 
 const saveMovie = (movie) =>
@@ -181,15 +243,19 @@ searchBtn.on('click', async function (event) {
     await getMovieId();
 })
 
-$(document).ready(function(){
+const getAndRenderMovies = () => getMovies().then(renderSavedMovies);
+getAndRenderMovies();
+
+$(document).ready(function () {
     $('.slick').slick({
         dots: true,
         infinite: true,
-        speed: 700,
-        autoplay:true,
-        autoplaySpeed: 2000,
-        arrows:false,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear',
         slidesToShow: 1,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
     });
-  });
+});

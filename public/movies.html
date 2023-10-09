@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Directory</title>
 
-  
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css"/>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick-theme.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -23,144 +23,67 @@
   </nav>
 
   <div class="container-fluid">
-    <div class="columns">
+    <div class="columns m-1">
       <div class="column is-half">
-        <div class="box">
+        <div class="box has-background-primary">
           <h2 class="title">Your Movies</h2>
+          <div class="columns is-centered">
+            <div class="column is-two-thirds">
 
-          <div class="slick">
+              <div id="saved-movies" class="slick">
 
-            <div class="card">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-96x96">
-                      <img src="https://placehold.co/600x400" alt="Placeholder image">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
                     </figure>
                   </div>
-                  <div class="custom-media media-content">
-                    <p class="title is-4">Movie Title</p>
-                    <p class="subtitle is-6">Director</p>
-                    <p class="desc-custom has-text-weight-medium is-6 ">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing
-                      elit. Vivamus pellentesque euismod magna,</p>
-                  </div>
-                  <div class="has-text-centered">
-                    <div class="stars">
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
+                  <div class="card-content">
+
+                    <div class="media has-text-centered">
+                      <div class="media-content">
+                        <p class="title is-4">Title</p>
+                        <p class="subtitle is-6">Director</p>
+                      </div>
                     </div>
-                    <button class="mt-5 mb-3 trash button is-danger">
-                      <span class="icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </button>
+
+                    <div class="content desc-custom has-text-weight-medium is-6">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Phasellus nec iaculis mauris.
+                      <div class="stars has-text-centered mt-3">
+                        <span class="icon">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="icon">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="icon">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="icon">
+                          <i class="fas fa-star"></i>
+                        </span>
+                        <span class="icon">
+                          <i class="fas fa-star"></i>
+                        </span>
+                      </div>
+                      <div class="button-container has-text-centered mt-4">
+                        <button class="button is-danger is-outlined">
+                          <span>Remove</span>
+                          <span class="icon is-small">
+                            <i class="fas fa-times"></i>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="card">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-96x96">
-                      <img src="https://placehold.co/600x400" alt="Placeholder image">
-                    </figure>
-                  </div>
-                  <div class="custom-media media-content">
-                    <p class="title is-4">Movie Title</p>
-                    <p class="subtitle is-6">Director</p>
-                    <p class="desc-custom has-text-weight-medium is-6 ">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing
-                      elit. Vivamus pellentesque euismod magna,</p>
-                  </div>
-                  <div class="has-text-centered">
-                    <div class="stars">
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                    </div>
-                    <button class="mt-5 mb-3 trash button is-danger">
-                      <span class="icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
+                
               </div>
-            </div>
 
-            <div class="card">
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-96x96">
-                      <img src="https://placehold.co/600x400" alt="Placeholder image">
-                    </figure>
-                  </div>
-                  <div class="custom-media media-content">
-                    <p class="title is-4">Movie Title</p>
-                    <p class="subtitle is-6">Director</p>
-                    <p class="desc-custom has-text-weight-medium is-6 ">Lorem ipsum dolor sit amet, consectetur
-                      adipiscing
-                      elit. Vivamus pellentesque euismod magna,</p>
-                  </div>
-                  <div class="has-text-centered">
-                    <div class="stars">
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                      <span class="icon">
-                        <i class="fas fa-star"></i>
-                      </span>
-                    </div>
-                    <button class="mt-5 mb-3 trash button is-danger">
-                      <span class="icon">
-                        <i class="fas fa-trash"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
-
           </div>
-
         </div>
       </div>
       <div class="column">
@@ -220,7 +143,7 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.0/slick/slick.min.js"></script>
   <script src="https://kit.fontawesome.com/57c7818032.js" crossorigin="anonymous"></script>
   <script src="./assets/js/script.js"></script>
 </body>
