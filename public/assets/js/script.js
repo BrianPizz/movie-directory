@@ -22,7 +22,7 @@ const getMovieId = async () => {
         }
         const data = await response.json();
         // if there are more than five movies only display five
-        if(data.total > 5){
+        if (data.total > 5) {
             for (let i = 0; i < 5; i++) {
                 movieId.push(data.search[i].id);
             }
@@ -53,14 +53,14 @@ const getDetails = async (id) => {
         }
         const data = await response.json();
         // console.log(data);
-        data.Response === 'True' && renderMovies(data);
-        
+        data.Response === 'True' && renderMovieSearch(data);
+
     } catch (error) {
         console.error('Error:', error);
     }
 };
 
-const renderMovies = (movie) => {
+const renderMovieSearch = (movie) => {
     // copy html format and create replica div
     const card = $('<div>').addClass('card');
 
@@ -133,23 +133,45 @@ $('#search-results').on('click', '.add', function () {
         description: description,
         rating: selectedStars
     }
-// save movie when Add button clicked
-    if(selectedStars){
+    // save movie when Add button clicked
+    if (selectedStars) {
         saveMovie(newMovie)
     } else {
         console.log('Added movie must include a rating!')
     }
-    
+
 })
 
+const getMovies = () =>
+    fetch('/api/movies', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+const renderSavedMovies = async (movies) => {
+    let jsonMovies = await notStrictEqual.json();
+
+    let movieList = [];
+
+    const createEl = () => {
+
+    }
+
+    if(jsonMovies.length === 0) {
+        movieList.push(createEl('No saved notes'))
+    }
+};
+
 const saveMovie = (movie) =>
-fetch('/api/movies', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(movie)
-})
+    fetch('/api/movies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movie)
+    })
 
 
 searchBtn.on('click', async function (event) {
@@ -158,3 +180,16 @@ searchBtn.on('click', async function (event) {
     movieSearchEl.empty();
     await getMovieId();
 })
+
+$(document).ready(function(){
+    $('.slick').slick({
+        dots: true,
+        infinite: true,
+        speed: 700,
+        autoplay:true,
+        autoplaySpeed: 2000,
+        arrows:false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    });
+  });

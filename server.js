@@ -19,12 +19,36 @@ app.get('/', (req, res) =>
 app.get('/movies', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/movies.html'))
 );
+// GET request for saved movies
+app.get('/api/movies', (req,res) => {
+    fs.readFile(`./db/movies.json`, (err, data) => {
+        if (err) throw err;
+        res.json(JSON.parse(data))
+    })
+})
 // POST request to add movie data to db
 app.post('/api/movies', (req, res) => {
-    console.log('recieved POST req')
+    console.log('Received POST request to /api/movies');
     const { title, director, description, rating } = req.body;
-    // only save movie data if there is a rating
-    if (rating) {
+    
+    // Read the existing movie data from the JSON file
+    fs.readFile(`./db/movies.json`, (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json('Error in reading movie data');
+        }
+
+        const movies = JSON.parse(data);
+
+        // Check if a movie with the same title already exists
+        const existingMovie = movies.find((movie) => movie.title === title);
+
+        if (existingMovie) {
+            // If the movie already exists, return an error response
+            return res.status(400).json('Movie with the same title already exists');
+        }
+
+        // If there's no existing movie with the same title, add the new movie
         const newMovie = {
             title: title,
             director: director,
@@ -33,26 +57,22 @@ app.post('/api/movies', (req, res) => {
             id: Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
                 .substring(1),
-        }
-        fs.readFile(`./db/movies.json`, (err,data) => {
-            if (err) throw err;
-            const movies = JSON.parse(data);
-            movies.forEach()
-            movies.push(newMovie);
-
-            fs.writeFile(`./db/movies.json`, JSON.stringify(movies, null, 4), (err) =>
-            err ? console.error(err) : console.log('Movie added!'))
-            res.json(movies)
-        })
-        const response = {
-            status: 'success',
-            body: newMovie,
         };
-        console.log(response)
-    } else {
-        res.status(500).json('Error in adding movie')
-    }
-})
+
+        movies.push(newMovie);
+
+        // Write the updated movie data back to the JSON file
+        fs.writeFile(`./db/movies.json`, JSON.stringify(movies, null, 4), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json('Error in writing movie data');
+            }
+
+            console.log('Movie added!');
+            res.json(movies);
+        });
+    });
+});
 // Listen for connections
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
