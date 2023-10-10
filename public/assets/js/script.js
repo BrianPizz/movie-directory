@@ -145,7 +145,7 @@ $('#search-results').on('click', '.add', function () {
     // save movie when Add button clicked
     if (selectedStars) {
         saveMovie(newMovie);
-        getAndRenderMovies();
+        // getAndRenderMovies();
     } else {
         console.log('Added movie must include a rating!')
     }
@@ -165,7 +165,7 @@ const renderSavedMovies = async (movies) => {
 
     savedMoviesListEl.empty();
 
-    const createEl = (img, title, dir, year, rating) => {
+    const createEl = (img, title, dir, year, rating, id) => {
 
         const renderStars = () => {
             let starHtml = '';
@@ -177,7 +177,7 @@ const renderSavedMovies = async (movies) => {
         return starHtml;
     }
     savedMoviesListEl.append(`
-    <div class="card m-2">
+    <div class="card m-2" id="${id}">
         <div class="card-content">
           <div class="media">
             <div class="media-left">
@@ -195,7 +195,7 @@ const renderSavedMovies = async (movies) => {
                 ${renderStars()}
               </div>
               <div class="button-container has-text-centered mt-4">
-                <button class="button is-danger is-outlined">
+                <button class="button is-danger is-outlined remove-movie">
                   <span>Remove</span>
                   <span class="icon is-small">
                     <i class="fas fa-times"></i>
@@ -220,7 +220,7 @@ const renderSavedMovies = async (movies) => {
     }
 
     jsonMovies.forEach(movie => {
-        createEl(movie.image, movie.title, movie.director, movie.year, movie.rating);
+        createEl(movie.image, movie.title, movie.director, movie.year, movie.rating, movie.id);
     });
 };
 
@@ -244,6 +244,32 @@ const saveMovie = async (movie) => {
     }
 };
 
+// Handle movie remove
+savedMoviesListEl.on('click', '.remove-movie', function(){
+    const movieEl = $(this).closest('.card');
+    const movieIdRemove = movieEl.attr('id');
+
+    removeMovie(movieIdRemove);
+
+    movieEl.remove();
+});
+// Movie remove
+const removeMovie = async (movieIdRemove) => {
+    try {
+      // Send a DELETE request to your server to remove the movie
+      const response = await fetch(`/api/movies/${movieIdRemove}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        console.log('Movie removed successfully.');
+      } else {
+        console.error('Failed to remove movie.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
 searchBtn.on('click', async function (event) {
     event.preventDefault();

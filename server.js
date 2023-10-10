@@ -75,6 +75,38 @@ app.post('/api/movies', (req, res) => {
         });
     });
 });
+
+// DELETE request to remove movie
+app.delete('/api/movies/:id', (req, res) => {
+    const movieIdToRemove = req.params.id;
+  
+    fs.readFile(`./db/movies.json`, (err, data) => {
+      if (err) throw err;
+      let movies = JSON.parse(data);
+  
+      // Find the index of the movie with the specified ID
+      const indexToRemove = movies.findIndex((movie) => movie.id === movieIdToRemove);
+  
+      if (indexToRemove === -1) {
+        return res.status(404).json('Movie not found');
+      }
+  
+      // Remove the movie from the array
+      movies.splice(indexToRemove, 1);
+  
+      // Write the updated movie data back to the JSON file
+      fs.writeFile(`./db/movies.json`, JSON.stringify(movies, null, 4), (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json('Error in writing movie data');
+        }
+  
+        console.log('Movie removed!');
+        res.json(movies);
+      });
+    });
+  });
+
 // Listen for connections
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
