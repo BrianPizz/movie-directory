@@ -64,6 +64,7 @@ const getDetails = async (id) => {
 
 const renderMovieSearch = (movie) => {
     // copy html format and create replica div
+    console.log(movie)
     const card = $('<div>').addClass('card');
 
     const resultCard = $('<div>').addClass('card-content');
@@ -87,8 +88,11 @@ const renderMovieSearch = (movie) => {
     const title = $('<div>').addClass('title is-4').text(movie.Title);
     content.append(title);
 
-    const dir = $('<div>').addClass('subtitle is-6').text(movie.Director);
+    const dir = $('<div>').addClass('subtitle is-6 mb-1').text(movie.Director);
     content.append(dir);
+
+    const date = $('<div>').addClass('has-text-weight-light mb-1').text(movie.Year);
+    content.append(date);
 
     const plot = $('<div>').addClass('has-text-weight-medium is-6').text(movie.Plot);
     content.append(plot);
@@ -128,7 +132,8 @@ $('#search-results').on('click', '.add', function () {
     const director = $(this).closest('.card').find('.subtitle').text();
     const description = $(this).closest('.card').find('.has-text-weight-medium').text();
     const selectedStars = $(this).closest('.card').find('.active').length;
-    const image = $(this).closest('.card').find('img').attr('src')
+    const image = $(this).closest('.card').find('img').attr('src');
+    const year = $(this).closest('.card').find('.has-text-weight-light').text();
 
     const newMovie = {
         title: title,
@@ -136,6 +141,7 @@ $('#search-results').on('click', '.add', function () {
         description: description,
         rating: selectedStars,
         image: image,
+        year: year,
     }
     // save movie when Add button clicked
     if (selectedStars) {
@@ -159,73 +165,62 @@ const renderSavedMovies = async (movies) => {
 
     let movieList = [];
 
-    const createEl = (img, title, dir, desc) => {
-        const saveCard = $('<div>').addClass('card');
+    const createEl = (img, title, dir, year, rating) => {
 
-        const saveImgSec = $('<div>').addClass('card-image');
-        saveCard.append(saveImgSec);
-
-        const saveImgCont = $('<figure>').addClass('image');
-        saveImgSec.append(saveImgCont);
-
-        const saveImg = $('<img>').attr('src', img);
-        saveImgCont.append(saveImg);
-
-        const saveCardContent = $('<div>').addClass('card-content');
-        saveCard.append(saveCardContent);
-
-        const saveMedia = $('<div>').addClass('media has-text-centered');
-        saveCardContent.append(saveMedia);
-
-        const saveMediaContent = $('<div>').addClass('media-content');
-        saveMedia.append(saveMediaContent);
-
-        const saveTitle = $('<div>').addClass('title is-4').text(title);
-        saveMediaContent.append(saveTitle);
-
-        const saveDirector = $('<div>').addClass('subtitle is-6').text(dir);
-        saveMediaContent.append(saveDirector);
-
-        const saveDesc = $('<div>').addClass('content desc-custom has-text-weight-medium is-6').text(desc);
-        saveCardContent.append(saveDesc);
-
-        const saveRating = $('<div>').addClass('stars has-text-centered mt-3');
-        saveDesc.append(saveRating);
-
-        for (let i = 0; i < 5; i++) {
-            const saveIcon = $('<span>').addClass('icon');
-            saveRating.append(saveIcon);
-            const saveStar = $('<i>').addClass('fas fa-star');
-            saveIcon.append(saveStar);
-
-            //add active star icon 
-        }
-
-        const removeBtnContainer = $('<div>').addClass('button-container has-text-centered mt-4');
-        saveDesc.append(removeBtnContainer);
-
-        const removeBtn = $('<button>').addClass('button is-danger is-outlined');
-        removeBtnContainer.append(removeBtn);
-
-        const btnText = $('<span>').text('Remove');
-        removeBtn.append(btnText);
-
-        const iconContainer = $('<span>').addClass('icon is-small');
-        removeBtn.append(iconContainer);
-
-        const removeIcon = $('<i>').addClass('fas fa-times');
-        iconContainer.append(removeIcon);
-
-        // $('.slick').slick('slickAdd', saveCard)
+        const renderStars = () => {
+            let starHtml = '';
+            for(let i = 0; i < rating; i++){
+                starHtml += `<span class="icon">
+                <i class="fas fa-star active"></i>
+              </span>`
+        }  
+        return starHtml;
     }
+    savedMoviesListEl.append(`
+    <div class="card m-2">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-96x96">
+                <img src="${img}" alt="${title}">
+              </figure>
+            </div>
+            <div class="custom-media media-content">
+              <p class="title is-4">${title}</p>
+              <p class="subtitle is-6 mb-1">${dir}</p>
+              <p class="has-text-weight-light mb-6">${year}</p>
+            </div>
+            <div class="has-text-centered">
+              <div class="stars">
+                ${renderStars()}
+              </div>
+              <div class="button-container has-text-centered mt-4">
+                <button class="button is-danger is-outlined">
+                  <span>Remove</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`)
+    }
+    
 
     if (jsonMovies.length === 0) {
-        createEl('#', 'No saved Movies!', '', '')
+        savedMoviesListEl.append(`
+        <div class="columns">
+            <div class="column has-text-centered">
+              <div class="subtitle">No movies saved!</div>
+            </div>
+          </div>
+        `)
     }
 
     jsonMovies.forEach(movie => {
-        console.log(movie)
-        createEl(movie.image, movie.title, movie.director, movie.description)
+        createEl(movie.image, movie.title, movie.director, movie.year, movie.rating)
     });
 };
 
@@ -247,7 +242,7 @@ searchBtn.on('click', async function (event) {
 })
 
 const getAndRenderMovies = () => getMovies().then(renderSavedMovies);
-//getAndRenderMovies();
+getAndRenderMovies();
 
 $(document).ready(function () {
     $('.slick').slick({
@@ -262,3 +257,5 @@ $(document).ready(function () {
         autoplaySpeed: 2000,
     });
 });
+// for poster add
+// $('.slick').slick('slickAdd', saveCard)

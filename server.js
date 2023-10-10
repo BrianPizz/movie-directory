@@ -29,7 +29,7 @@ app.get('/api/movies', (req,res) => {
 // POST request to add movie data to db
 app.post('/api/movies', (req, res) => {
     console.log('Received POST request to /api/movies');
-    const { title, director, description, rating, image } = req.body;
+    const { title, director, description, rating, image, year } = req.body;
     
     // Read the existing movie data from the JSON file
     fs.readFile(`./db/movies.json`, (err, data) => {
@@ -55,6 +55,7 @@ app.post('/api/movies', (req, res) => {
             description: description,
             rating: rating,
             image: image,
+            year: year,
             id: Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
                 .substring(1),
