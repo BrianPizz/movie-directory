@@ -1,7 +1,8 @@
 const movieSearchEl = $('#movie-search');
 const movieSearchResultsEl = $('#search-results');
 const searchBtn = $('#search-button');
-const savedMoviesEl = $('#saved-movies')
+const savedMoviesPosterEl = $('#saved-movies');
+const savedMoviesListEl = $('#movie-list')
 let movieId = [];
 
 const getMovieId = async () => {
@@ -127,12 +128,14 @@ $('#search-results').on('click', '.add', function () {
     const director = $(this).closest('.card').find('.subtitle').text();
     const description = $(this).closest('.card').find('.has-text-weight-medium').text();
     const selectedStars = $(this).closest('.card').find('.active').length;
+    const image = $(this).closest('.card').find('img').attr('src')
 
     const newMovie = {
         title: title,
         director: director,
         description: description,
-        rating: selectedStars
+        rating: selectedStars,
+        image: image,
     }
     // save movie when Add button clicked
     if (selectedStars) {
@@ -162,7 +165,7 @@ const renderSavedMovies = async (movies) => {
         const saveImgSec = $('<div>').addClass('card-image');
         saveCard.append(saveImgSec);
 
-        const saveImgCont = $('<figure>').addClass('image is-4by3');
+        const saveImgCont = $('<figure>').addClass('image');
         saveImgSec.append(saveImgCont);
 
         const saveImg = $('<img>').attr('src', img);
@@ -213,7 +216,7 @@ const renderSavedMovies = async (movies) => {
         const removeIcon = $('<i>').addClass('fas fa-times');
         iconContainer.append(removeIcon);
 
-        $('.slick').slick('slickAdd', saveCard)
+        // $('.slick').slick('slickAdd', saveCard)
     }
 
     if (jsonMovies.length === 0) {
@@ -222,7 +225,7 @@ const renderSavedMovies = async (movies) => {
 
     jsonMovies.forEach(movie => {
         console.log(movie)
-        createEl('#', movie.title, movie.director, movie.description)
+        createEl(movie.image, movie.title, movie.director, movie.description)
     });
 };
 
@@ -244,7 +247,7 @@ searchBtn.on('click', async function (event) {
 })
 
 const getAndRenderMovies = () => getMovies().then(renderSavedMovies);
-getAndRenderMovies();
+//getAndRenderMovies();
 
 $(document).ready(function () {
     $('.slick').slick({
