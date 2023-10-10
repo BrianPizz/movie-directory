@@ -64,7 +64,6 @@ const getDetails = async (id) => {
 
 const renderMovieSearch = (movie) => {
     // copy html format and create replica div
-    console.log(movie)
     const card = $('<div>').addClass('card');
 
     const resultCard = $('<div>').addClass('card-content');
@@ -145,7 +144,8 @@ $('#search-results').on('click', '.add', function () {
     }
     // save movie when Add button clicked
     if (selectedStars) {
-        saveMovie(newMovie)
+        saveMovie(newMovie);
+        getAndRenderMovies();
     } else {
         console.log('Added movie must include a rating!')
     }
@@ -163,7 +163,7 @@ const getMovies = () =>
 const renderSavedMovies = async (movies) => {
     let jsonMovies = await movies.json();
 
-    let movieList = [];
+    savedMoviesListEl.empty();
 
     const createEl = (img, title, dir, year, rating) => {
 
@@ -220,18 +220,29 @@ const renderSavedMovies = async (movies) => {
     }
 
     jsonMovies.forEach(movie => {
-        createEl(movie.image, movie.title, movie.director, movie.year, movie.rating)
+        createEl(movie.image, movie.title, movie.director, movie.year, movie.rating);
     });
 };
 
-const saveMovie = (movie) =>
-    fetch('/api/movies', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(movie)
-    })
+const saveMovie = async (movie) => {
+    try {
+        const response = await fetch('/api/movies', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(movie)
+        });
+
+        if (response.ok) {
+            getAndRenderMovies();
+        } else {
+            console.error('Failed to save movie.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
 
 searchBtn.on('click', async function (event) {

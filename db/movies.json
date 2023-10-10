@@ -1,2 +1,65 @@
 [
+    {
+        "title": "Avengers: Endgame",
+        "director": "Anthony Russo, Joe Russo",
+        "description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+        "rating": 4,
+        "image": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
+        "year": "2019",
+        "id": "d72d"
+    },
+    {
+        "title": "Avatar: The Way of Water",
+        "director": "James Cameron",
+        "description": "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home.",
+        "rating": 1,
+        "image": "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_SX300.jpg",
+        "year": "2022",
+        "id": "1a92"
+    },
+    {
+        "title": "Tenet",
+        "director": "Christopher Nolan",
+        "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
+        "rating": 3,
+        "image": "https://m.media-amazon.com/images/M/MV5BMzU3YWYwNTQtZTdiMC00NjY5LTlmMTMtZDFlYTEyODBjMTk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+        "year": "2020",
+        "id": "3657"
+    },
+    {
+        "title": "The Avengers",
+        "director": "Joss Whedon",
+        "description": "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+        "rating": 2,
+        "image": "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        "year": "2012",
+        "id": "c3a5"
+    },
+    {
+        "title": "Iron Man",
+        "director": "Jon Favreau",
+        "description": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+        "rating": 5,
+        "image": "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg",
+        "year": "2008",
+        "id": "f5fc"
+    },
+    {
+        "title": "Taken",
+        "director": "Pierre Morel",
+        "description": "A retired CIA agent travels across Europe and relies on his old skills to save his estranged daughter, who has been kidnapped while on a trip to Paris.",
+        "rating": 3,
+        "image": "https://m.media-amazon.com/images/M/MV5BZDA0ODYzZGMtOGI3ZS00YTdjLTk0ZjEtYzA0Zjg3MDM4OTA4XkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg",
+        "year": "2008",
+        "id": "a57f"
+    },
+    {
+        "title": "Taken 2",
+        "director": "Olivier Megaton",
+        "description": "In Istanbul, retired CIA operative Bryan Mills and his wife are taken hostage by the father of a kidnapper Mills killed while rescuing his daughter.",
+        "rating": 2,
+        "image": "https://m.media-amazon.com/images/M/MV5BMTkwNTQ0ODExOV5BMl5BanBnXkFtZTcwNjU3NDQwOA@@._V1_SX300.jpg",
+        "year": "2012",
+        "id": "ed4f"
+    }
 ]
